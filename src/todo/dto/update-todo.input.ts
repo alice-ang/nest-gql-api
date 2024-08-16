@@ -6,6 +6,9 @@ export class UpdateTodoInput extends PartialType(CreateTodoInput) {
   @Field(() => Int)
   id: number;
 
-  @Field(() => String)
-  title: string;
+  // @Field(() => String)
+  // title: string;
+
+  @Field(() => Boolean)
+  isCompleted: boolean;
 }

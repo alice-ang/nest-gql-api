@@ -10,4 +10,10 @@ export class Todo {
 
   @Field(() => Boolean)
   isCompleted: boolean;
+
+  @Field(() => Date)
+  createdAt: Date;
+
+  @Field(() => Date)
+  updatedAt: Date;
 }

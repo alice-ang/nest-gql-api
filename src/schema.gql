@@ -15,9 +15,100 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type PlayerSummary {
+  """Steam Id of player account"""
+  steamId: String!
+  communityvisibilitystate: Float!
+  profilestate: Float!
+  personaname: String!
+  commentpermission: Float!
+  profileurl: String!
+  avatar: String!
+  avatarmedium: String!
+  avatarfull: String!
+  avatarhash: String!
+  lastlogoff: Float!
+  personastate: Float!
+  primaryclanid: String!
+  timecreated: Float!
+  personastateflags: Float!
+}
+
+type Steam {
+  """Steam Id of player account"""
+  steamId: String!
+  communityvisibilitystate: Float!
+  profilestate: Float!
+  personaname: String!
+  commentpermission: Float!
+  profileurl: String!
+  avatar: String!
+  avatarmedium: String!
+  avatarfull: String!
+  avatarhash: String!
+  lastlogoff: Float!
+  personastate: Float!
+  primaryclanid: String!
+  timecreated: Float!
+  personastateflags: Float!
+}
+
+type NewsItem {
+  gid: String!
+  title: String!
+  url: String!
+  is_external_ur: Boolean!
+  author: String!
+  contents: String!
+  feedlabel: String!
+  date: DateTime!
+  feedname: String!
+  feed_type: Float!
+  appid: Float!
+}
+
+type GameNews {
+  appid: Float!
+  newsitems: [NewsItem!]!
+  count: Float!
+}
+
+type Stats {
+  name: String!
+}
+
+type Achievement {
+  name: String!
+  achieved: Float!
+}
+
+type PlayerStats {
+  """Steam Id of player account"""
+  steamID: String!
+  gameName: String!
+  achievements: [Achievement!]!
+  stats: [Stats!]!
+}
+
 type Query {
   todos: [Todo!]!
   todo(id: Int!): Todo!
+  playerStats(playerSpecificInput: PlayerSpecificInput!): PlayerStats!
+  playerSummary(playerSpecificInput: PlayerSpecificInput!): PlayerSummary!
+  ownedGames(playerSpecificInput: PlayerSpecificInput!): [Steam!]!
+  recentlyPlayed(playerSpecificInput: PlayerSpecificInput!): [Steam!]!
+  playerAchievements(playerSpecificInput: PlayerSpecificInput!): [Steam!]!
+  gameAchievements(gameInput: GameInput!): Steam!
+  gameNews(gameInput: GameInput!): GameNews!
+}
+
+input PlayerSpecificInput {
+  appId: String
+  steamId: String!
+}
+
+input GameInput {
+  appId: String!
 }
 
 type Mutation {

@@ -20,6 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@nestjs/axios": "^3.0.2",
     "@apollo/server": "^4.10.4",
     "@discord-nestjs/core": "^5.3.14",
     "@nestjs/apollo": "^12.1.0",
@@ -29,6 +30,7 @@
     "@nestjs/graphql": "^12.1.1",
     "@nestjs/platform-express": "^10.0.0",
     "@prisma/client": "^5.18.0",
+    "axios": "^1.7.4",
     "discord.js": "^14.15.3",
     "graphql": "^16.8.1",
     "reflect-metadata": "^0.2.0",

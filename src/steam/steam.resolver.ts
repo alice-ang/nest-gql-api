@@ -8,12 +8,15 @@ import { Steam } from './entities/steam.entity';
 import { SteamService } from './steam.service';
 import { GameNews } from './entities/game-news.entity';
 import { PlayerStats } from './entities/player-stats.entity';
+import { OwnedGames } from './entities/owned-games.entity';
+import { RecentlyPlayed } from './entities/recently.played.entity';
+import { GlobalAchievements } from './entities/global-achievements.entity';
 
 @Resolver(() => Steam)
 export class SteamResolver {
   constructor(private readonly steamService: SteamService) {}
 
-  @Query(() => PlayerStats, { name: 'playerStats' })
+  @Query(() => PlayerStats, { name: 'getPlayerStats' })
   async getPlayerStats(
     @Args('playerSpecificInput') playerSpecificInput: PlayerSpecificInput,
   ) {
@@ -40,7 +43,7 @@ export class SteamResolver {
     }
   }
 
-  @Query(() => PlayerSummary, { name: 'playerSummary' })
+  @Query(() => PlayerSummary, { name: 'getPlayerSummary' })
   async getPlayerSummary(
     @Args('playerSpecificInput') playerSpecificInput: PlayerSpecificInput,
   ) {
@@ -64,21 +67,61 @@ export class SteamResolver {
     }
   }
 
-  @Query(() => [Steam], { name: 'ownedGames' })
-  getOwnedGames(
+  @Query(() => OwnedGames, { name: 'getOwnedGames' })
+  async getOwnedGames(
     @Args('playerSpecificInput') playerSpecificInput: PlayerSpecificInput,
   ) {
-    return this.steamService.getOwnedGames(playerSpecificInput);
+    try {
+      const ownedGames =
+        await this.steamService.getOwnedGames(playerSpecificInput);
+
+      if (!ownedGames.response.game_count) {
+        throw new HttpException(
+          'No games found for this player',
+          HttpStatus.NOT_FOUND,
+        );
+      }
+
+      return ownedGames.response;
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException(
+        'Failed to fetch owned games',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
-  @Query(() => [Steam], { name: 'recentlyPlayed' })
-  getRecentlyPlayedGames(
+  @Query(() => RecentlyPlayed, { name: 'getRecentlyPlayed' })
+  async getRecentlyPlayedGames(
     @Args('playerSpecificInput') playerSpecificInput: PlayerSpecificInput,
   ) {
-    return this.steamService.getRecentlyPlayedGames(playerSpecificInput);
+    try {
+      const recentlyPlayed =
+        await this.steamService.getRecentlyPlayedGames(playerSpecificInput);
+
+      if (!recentlyPlayed.response.total_count) {
+        throw new HttpException(
+          'No recently played games found for this player',
+          HttpStatus.NOT_FOUND,
+        );
+      }
+
+      return recentlyPlayed.response;
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException(
+        'Failed to fetch recently played games',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
-  @Query(() => [Steam], { name: 'playerAchievements' })
+  @Query(() => [Steam], { name: 'getPlayerAchievements' })
   async getPlayerAchievements(
     @Args('playerSpecificInput') playerSpecificInput: PlayerSpecificInput,
   ) {
@@ -105,12 +148,29 @@ export class SteamResolver {
     }
   }
 
-  @Query(() => Steam, { name: 'gameAchievements' })
-  getGameAchievements(@Args('gameInput') gameInput: GameInput) {
-    return this.steamService.getGameAchievements(gameInput);
+  @Query(() => GlobalAchievements, { name: 'getGlobalGameAchievements' })
+  async getGlobalGameAchievements(@Args('gameInput') gameInput: GameInput) {
+    try {
+      const gameSummary =
+        await this.steamService.getGameGlobalAchievements(gameInput);
+
+      if (!gameSummary.achievementpercentages) {
+        throw new HttpException('No game data found', HttpStatus.NOT_FOUND);
+      }
+
+      return gameSummary.achievementpercentages;
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException(
+        'Failed to fetch game data',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
-  @Query(() => GameNews, { name: 'gameNews' })
+  @Query(() => GameNews, { name: 'getGameNews' })
   async getGameNews(@Args('gameInput') gameInput: GameInput) {
     try {
       const gameSummary = await this.steamService.getGameNews(gameInput);

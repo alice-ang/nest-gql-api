@@ -75,11 +75,13 @@ type GameNews {
 
 type Stats {
   name: String!
+  value: Float!
 }
 
 type Achievement {
   name: String!
-  achieved: Float!
+  achieved: Float
+  percent: Float
 }
 
 type PlayerStats {
@@ -90,16 +92,44 @@ type PlayerStats {
   stats: [Stats!]!
 }
 
+type Game {
+  appid: Float!
+  name: String
+  playtime_forever: Float!
+  playtime_windows_forever: Float
+  playtime_mac_forever: Float
+  playtime_linux_forever: Float
+  playtime_deck_forever: Float
+  rtime_last_played: Float!
+  playtime_disconnected: Float
+  playtime_2weeks: Float
+  img_icon_url: String
+}
+
+type OwnedGames {
+  game_count: Float!
+  games: [Game!]!
+}
+
+type RecentlyPlayed {
+  total_count: Float!
+  games: [Game!]!
+}
+
+type GlobalAchievements {
+  achievements: [Achievement!]!
+}
+
 type Query {
   todos: [Todo!]!
   todo(id: Int!): Todo!
-  playerStats(playerSpecificInput: PlayerSpecificInput!): PlayerStats!
-  playerSummary(playerSpecificInput: PlayerSpecificInput!): PlayerSummary!
-  ownedGames(playerSpecificInput: PlayerSpecificInput!): [Steam!]!
-  recentlyPlayed(playerSpecificInput: PlayerSpecificInput!): [Steam!]!
-  playerAchievements(playerSpecificInput: PlayerSpecificInput!): [Steam!]!
-  gameAchievements(gameInput: GameInput!): Steam!
-  gameNews(gameInput: GameInput!): GameNews!
+  getPlayerStats(playerSpecificInput: PlayerSpecificInput!): PlayerStats!
+  getPlayerSummary(playerSpecificInput: PlayerSpecificInput!): PlayerSummary!
+  getOwnedGames(playerSpecificInput: PlayerSpecificInput!): OwnedGames!
+  getRecentlyPlayed(playerSpecificInput: PlayerSpecificInput!): RecentlyPlayed!
+  getPlayerAchievements(playerSpecificInput: PlayerSpecificInput!): [Steam!]!
+  getGlobalGameAchievements(gameInput: GameInput!): GlobalAchievements!
+  getGameNews(gameInput: GameInput!): GameNews!
 }
 
 input PlayerSpecificInput {

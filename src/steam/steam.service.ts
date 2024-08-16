@@ -42,7 +42,7 @@ export class SteamService {
     return response.data;
   }
 
-  async getGameAchievements(gameInput: GameInput) {
+  async getGameGlobalAchievements(gameInput: GameInput) {
     const gamesUrl = `${this.baseUrl}/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/?gameid=${gameInput.appId}&format=json`;
     const response = await firstValueFrom(this.httpService.get(gamesUrl));
     return response.data;

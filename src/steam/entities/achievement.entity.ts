@@ -5,6 +5,9 @@ export class Achievement {
   @Field(() => String)
   name: string;
 
-  @Field(() => Number)
+  @Field({ nullable: true })
   achieved: number;
+
+  @Field({ nullable: true })
+  percent: number;
 }

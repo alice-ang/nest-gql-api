@@ -3,12 +3,12 @@ import { Injectable } from '@nestjs/common';
 
 @Command({
   name: 'ping',
-  description: 'Responds with pong',
+  description: 'Responds with PONG!',
 })
 @Injectable()
 export class PingCommand {
   @Handler()
-  onPlaylist(): string {
+  onPing(): string {
     return 'PONG!';
   }
 }

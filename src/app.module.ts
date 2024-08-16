@@ -10,6 +10,7 @@ import { DiscordModule } from '@discord-nestjs/core';
 import { BotModule } from './bot/bot.module';
 import { GatewayIntentBits } from 'discord.js';
 import { BotSlashCommandsModule } from './bot/bot-slash-commands.module';
+import { SteamModule } from './steam/steam.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { BotSlashCommandsModule } from './bot/bot-slash-commands.module';
     TodoModule,
     BotModule,
     BotSlashCommandsModule,
+    SteamModule,
   ],
 
   providers: [PrismaService],

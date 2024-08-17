@@ -40,7 +40,7 @@ $ npm install
 # Make sure docker is running
 docker compose up
 
-# Prisma generate after schema changes
+# Prisma generate after schema.prisma changes
 npx prisma generate
 
 # Migration

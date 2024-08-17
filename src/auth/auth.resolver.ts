@@ -11,7 +11,7 @@ export class AuthResolver {
 
   @Mutation(() => SigninResponse)
   signUp(@Args('signUpInput') signUpInput: SignUpInput) {
-    return this.authService.create(signUpInput);
+    return this.authService.signUp(signUpInput);
   }
 
   @Query(() => [Auth], { name: 'auth' })
@@ -26,7 +26,7 @@ export class AuthResolver {
 
   @Mutation(() => Auth)
   updateAuth(@Args('updateAuthInput') updateAuthInput: UpdateAuthInput) {
-    return this.authService.update(updateAuthInput.id, updateAuthInput);
+    return this.authService.update(updateAuthInput.id);
   }
 
   @Mutation(() => Auth)

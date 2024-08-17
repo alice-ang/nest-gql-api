@@ -27,8 +27,7 @@ model User {
   username String
   email String
   hashedPassword String
-  hashedRefreshedToken String?
-
+  hashedRefreshToken String?
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }

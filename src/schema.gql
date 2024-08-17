@@ -18,39 +18,39 @@ scalar DateTime
 type PlayerSummary {
   """Steam Id of player account"""
   steamId: String!
-  communityvisibilitystate: Float!
-  profilestate: Float!
+  communityvisibilitystate: Int!
+  profilestate: Int!
   personaname: String!
-  commentpermission: Float!
+  commentpermission: Int!
   profileurl: String!
   avatar: String!
   avatarmedium: String!
   avatarfull: String!
   avatarhash: String!
   lastlogoff: Float!
-  personastate: Float!
+  personastate: Int!
   primaryclanid: String!
-  timecreated: Float!
-  personastateflags: Float!
+  timecreated: Int!
+  personastateflags: Int!
 }
 
 type Steam {
   """Steam Id of player account"""
   steamId: String!
-  communityvisibilitystate: Float!
-  profilestate: Float!
+  communityvisibilitystate: Int!
+  profilestate: Int!
   personaname: String!
-  commentpermission: Float!
+  commentpermission: Int!
   profileurl: String!
   avatar: String!
   avatarmedium: String!
   avatarfull: String!
   avatarhash: String!
-  lastlogoff: Float!
-  personastate: Float!
+  lastlogoff: Int!
+  personastate: Int!
   primaryclanid: String!
-  timecreated: Float!
-  personastateflags: Float!
+  timecreated: Int!
+  personastateflags: Int!
 }
 
 type NewsItem {
@@ -63,19 +63,19 @@ type NewsItem {
   feedlabel: String!
   date: DateTime!
   feedname: String!
-  feed_type: Float!
-  appid: Float!
+  feed_type: Int!
+  appid: Int!
 }
 
 type GameNews {
-  appid: Float!
+  appid: Int!
   newsitems: [NewsItem!]!
-  count: Float!
+  count: Int!
 }
 
 type Stats {
   name: String!
-  value: Float!
+  value: Int!
 }
 
 type Achievement {
@@ -93,9 +93,9 @@ type PlayerStats {
 }
 
 type Game {
-  appid: Float!
+  appid: Int!
   name: String
-  playtime_forever: Float!
+  playtime_forever: Int!
   playtime_windows_forever: Float
   playtime_mac_forever: Float
   playtime_linux_forever: Float
@@ -107,17 +107,22 @@ type Game {
 }
 
 type OwnedGames {
-  game_count: Float!
+  game_count: Int!
   games: [Game!]!
 }
 
 type RecentlyPlayed {
-  total_count: Float!
+  total_count: Int!
   games: [Game!]!
 }
 
 type GlobalAchievements {
   achievements: [Achievement!]!
+}
+
+type Auth {
+  """Example field (placeholder)"""
+  exampleField: Int!
 }
 
 type Query {
@@ -130,6 +135,7 @@ type Query {
   getPlayerAchievements(playerSpecificInput: PlayerSpecificInput!): [Steam!]!
   getGlobalGameAchievements(gameInput: GameInput!): GlobalAchievements!
   getGameNews(gameInput: GameInput!): GameNews!
+  auth(id: Int!): Auth!
 }
 
 input PlayerSpecificInput {
@@ -145,6 +151,9 @@ type Mutation {
   createTodo(createTodoInput: CreateTodoInput!): Todo!
   updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
   removeTodo(id: Int!): Todo!
+  createAuth(signUpInput: SignUpInput!): Auth!
+  updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
+  removeAuth(id: Int!): Auth!
 }
 
 input CreateTodoInput {
@@ -155,4 +164,17 @@ input UpdateTodoInput {
   title: String
   id: Int!
   isCompleted: Boolean!
+}
+
+input SignUpInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input UpdateAuthInput {
+  username: String
+  email: String
+  password: String
+  id: Int!
 }

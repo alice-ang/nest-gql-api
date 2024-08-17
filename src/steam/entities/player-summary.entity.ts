@@ -1,20 +1,20 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class PlayerSummary {
   @Field(() => String, { description: 'Steam Id of player account' })
   steamId: string;
 
-  @Field(() => Number)
+  @Field(() => Int)
   communityvisibilitystate: number;
 
-  @Field(() => Number)
+  @Field(() => Int)
   profilestate: number;
 
   @Field(() => String)
   personaname: string;
 
-  @Field(() => Number)
+  @Field(() => Int)
   commentpermission: number;
 
   @Field(() => String)
@@ -35,15 +35,15 @@ export class PlayerSummary {
   @Field(() => Number)
   lastlogoff: number;
 
-  @Field(() => Number)
+  @Field(() => Int)
   personastate: number;
 
   @Field(() => String)
   primaryclanid: string;
 
-  @Field(() => Number)
+  @Field(() => Int)
   timecreated: number;
 
-  @Field(() => Number)
+  @Field(() => Int)
   personastateflags: number;
 }

@@ -1,9 +1,9 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Game } from './game.entity';
 
 @ObjectType()
 export class RecentlyPlayed {
-  @Field(() => Number)
+  @Field(() => Int)
   total_count: number;
 
   @Field(() => [Game])

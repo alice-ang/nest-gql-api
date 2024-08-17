@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class NewsItem {
@@ -28,9 +28,9 @@ export class NewsItem {
   @Field(() => String)
   feedname: string;
 
-  @Field(() => Number)
+  @Field(() => Int)
   feed_type: number;
 
-  @Field(() => Number)
+  @Field(() => Int)
   appid: number;
 }

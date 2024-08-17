@@ -54,7 +54,8 @@ type Mutation {
   createTodo(createTodoInput: CreateTodoInput!): Todo!
   removeAuth(id: Int!): Auth!
   removeTodo(id: Int!): Todo!
-  signUp(signUpInput: SignUpInput!): SigninResponse!
+  signIn(signInInput: SignInInput!): SignInResponse!
+  signUp(signUpInput: SignUpInput!): SignInResponse!
   updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
   updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
 }
@@ -113,7 +114,6 @@ type PlayerSummary {
 }
 
 type Query {
-  auth(id: Int!): Auth!
   getGameNews(gameInput: GameInput!): GameNews!
   getGlobalGameAchievements(gameInput: GameInput!): GlobalAchievements!
   getOwnedGames(playerSpecificInput: PlayerSpecificInput!): OwnedGames!
@@ -130,16 +130,21 @@ type RecentlyPlayed {
   total_count: Int!
 }
 
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+type SignInResponse {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
+}
+
 input SignUpInput {
   email: String!
   password: String!
   username: String!
-}
-
-type SigninResponse {
-  accessToken: String!
-  refreshToken: String!
-  user: User!
 }
 
 type Stats {

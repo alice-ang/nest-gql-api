@@ -3,7 +3,7 @@ import { IsNotEmpty, IsString } from 'class-validator';
 import { User } from '../../user/entities/user.entity';
 
 @ObjectType()
-export class SigninResponse {
+export class SignInResponse {
   @IsNotEmpty()
   @IsString()
   @Field(() => String)

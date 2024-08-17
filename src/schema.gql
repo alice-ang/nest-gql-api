@@ -8,11 +8,6 @@ type Achievement {
   percent: Float
 }
 
-type Auth {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
 input CreateTodoInput {
   title: String!
 }
@@ -50,13 +45,16 @@ type GlobalAchievements {
   achievements: [Achievement!]!
 }
 
+type LogOutResponse {
+  isLoggedOut: Boolean!
+}
+
 type Mutation {
   createTodo(createTodoInput: CreateTodoInput!): Todo!
-  removeAuth(id: Int!): Auth!
   removeTodo(id: Int!): Todo!
   signIn(signInInput: SignInInput!): SignInResponse!
+  signOut(id: Int!): LogOutResponse!
   signUp(signUpInput: SignUpInput!): SignInResponse!
-  updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
   updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
 }
 
@@ -178,13 +176,6 @@ type Todo {
   isCompleted: Boolean!
   title: String!
   updatedAt: DateTime!
-}
-
-input UpdateAuthInput {
-  email: String
-  id: Int!
-  password: String
-  username: String
 }
 
 input UpdateTodoInput {

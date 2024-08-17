@@ -11,12 +11,15 @@ import { BotModule } from './bot/bot.module';
 import { GatewayIntentBits } from 'discord.js';
 import { BotSlashCommandsModule } from './bot/bot-slash-commands.module';
 import { SteamModule } from './steam/steam.module';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      sortSchema: true,
       playground: true,
     }),
     ConfigModule.forRoot({
@@ -36,6 +39,8 @@ import { SteamModule } from './steam/steam.module';
     BotModule,
     BotSlashCommandsModule,
     SteamModule,
+    AuthModule,
+    UserModule,
   ],
 
   providers: [PrismaService],

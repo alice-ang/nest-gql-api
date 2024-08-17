@@ -1,14 +1,14 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class Game {
-  @Field(() => Number)
+  @Field(() => Int)
   appid: number;
 
   @Field({ nullable: true })
   name?: string;
 
-  @Field(() => Number)
+  @Field(() => Int)
   playtime_forever: number;
 
   @Field({ defaultValue: 0, nullable: true })

@@ -2,12 +2,14 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Todo {
-  id: Int!
+type Achievement {
+  achieved: Float
+  name: String!
+  percent: Float
+}
+
+input CreateTodoInput {
   title: String!
-  isCompleted: Boolean!
-  createdAt: DateTime!
-  updatedAt: DateTime!
 }
 
 """
@@ -15,121 +17,64 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type PlayerSummary {
-  """Steam Id of player account"""
-  steamId: String!
-  communityvisibilitystate: Float!
-  profilestate: Float!
-  personaname: String!
-  commentpermission: Float!
-  profileurl: String!
-  avatar: String!
-  avatarmedium: String!
-  avatarfull: String!
-  avatarhash: String!
-  lastlogoff: Float!
-  personastate: Float!
-  primaryclanid: String!
-  timecreated: Float!
-  personastateflags: Float!
+type Game {
+  appid: Int!
+  img_icon_url: String
+  name: String
+  playtime_2weeks: Float
+  playtime_deck_forever: Float
+  playtime_disconnected: Float
+  playtime_forever: Int!
+  playtime_linux_forever: Float
+  playtime_mac_forever: Float
+  playtime_windows_forever: Float
+  rtime_last_played: Float!
 }
 
-type Steam {
-  """Steam Id of player account"""
-  steamId: String!
-  communityvisibilitystate: Float!
-  profilestate: Float!
-  personaname: String!
-  commentpermission: Float!
-  profileurl: String!
-  avatar: String!
-  avatarmedium: String!
-  avatarfull: String!
-  avatarhash: String!
-  lastlogoff: Float!
-  personastate: Float!
-  primaryclanid: String!
-  timecreated: Float!
-  personastateflags: Float!
-}
-
-type NewsItem {
-  gid: String!
-  title: String!
-  url: String!
-  is_external_ur: Boolean!
-  author: String!
-  contents: String!
-  feedlabel: String!
-  date: DateTime!
-  feedname: String!
-  feed_type: Float!
-  appid: Float!
+input GameInput {
+  appId: String!
 }
 
 type GameNews {
-  appid: Float!
+  appid: Int!
+  count: Int!
   newsitems: [NewsItem!]!
-  count: Float!
-}
-
-type Stats {
-  name: String!
-  value: Float!
-}
-
-type Achievement {
-  name: String!
-  achieved: Float
-  percent: Float
-}
-
-type PlayerStats {
-  """Steam Id of player account"""
-  steamID: String!
-  gameName: String!
-  achievements: [Achievement!]!
-  stats: [Stats!]!
-}
-
-type Game {
-  appid: Float!
-  name: String
-  playtime_forever: Float!
-  playtime_windows_forever: Float
-  playtime_mac_forever: Float
-  playtime_linux_forever: Float
-  playtime_deck_forever: Float
-  rtime_last_played: Float!
-  playtime_disconnected: Float
-  playtime_2weeks: Float
-  img_icon_url: String
-}
-
-type OwnedGames {
-  game_count: Float!
-  games: [Game!]!
-}
-
-type RecentlyPlayed {
-  total_count: Float!
-  games: [Game!]!
 }
 
 type GlobalAchievements {
   achievements: [Achievement!]!
 }
 
-type Query {
-  todos: [Todo!]!
-  todo(id: Int!): Todo!
-  getPlayerStats(playerSpecificInput: PlayerSpecificInput!): PlayerStats!
-  getPlayerSummary(playerSpecificInput: PlayerSpecificInput!): PlayerSummary!
-  getOwnedGames(playerSpecificInput: PlayerSpecificInput!): OwnedGames!
-  getRecentlyPlayed(playerSpecificInput: PlayerSpecificInput!): RecentlyPlayed!
-  getPlayerAchievements(playerSpecificInput: PlayerSpecificInput!): [Steam!]!
-  getGlobalGameAchievements(gameInput: GameInput!): GlobalAchievements!
-  getGameNews(gameInput: GameInput!): GameNews!
+type LogOutResponse {
+  isLoggedOut: Boolean!
+}
+
+type Mutation {
+  createTodo(createTodoInput: CreateTodoInput!): Todo!
+  removeTodo(id: Int!): Todo!
+  signIn(signInInput: SignInInput!): SignInResponse!
+  signOut(id: Int!): LogOutResponse!
+  signUp(signUpInput: SignUpInput!): SignInResponse!
+  updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
+}
+
+type NewsItem {
+  appid: Int!
+  author: String!
+  contents: String!
+  date: DateTime!
+  feed_type: Int!
+  feedlabel: String!
+  feedname: String!
+  gid: String!
+  is_external_ur: Boolean!
+  title: String!
+  url: String!
+}
+
+type OwnedGames {
+  game_count: Int!
+  games: [Game!]!
 }
 
 input PlayerSpecificInput {
@@ -137,22 +82,110 @@ input PlayerSpecificInput {
   steamId: String!
 }
 
-input GameInput {
-  appId: String!
+type PlayerStats {
+  achievements: [Achievement!]!
+  gameName: String!
+  stats: [Stats!]!
+
+  """Steam Id of player account"""
+  steamID: String!
 }
 
-type Mutation {
-  createTodo(createTodoInput: CreateTodoInput!): Todo!
-  updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
-  removeTodo(id: Int!): Todo!
+type PlayerSummary {
+  avatar: String!
+  avatarfull: String!
+  avatarhash: String!
+  avatarmedium: String!
+  commentpermission: Int!
+  communityvisibilitystate: Int!
+  lastlogoff: Float!
+  personaname: String!
+  personastate: Int!
+  personastateflags: Int!
+  primaryclanid: String!
+  profilestate: Int!
+  profileurl: String!
+
+  """Steam Id of player account"""
+  steamId: String!
+  timecreated: Int!
 }
 
-input CreateTodoInput {
+type Query {
+  getGameNews(gameInput: GameInput!): GameNews!
+  getGlobalGameAchievements(gameInput: GameInput!): GlobalAchievements!
+  getOwnedGames(playerSpecificInput: PlayerSpecificInput!): OwnedGames!
+  getPlayerAchievements(playerSpecificInput: PlayerSpecificInput!): [Steam!]!
+  getPlayerStats(playerSpecificInput: PlayerSpecificInput!): PlayerStats!
+  getPlayerSummary(playerSpecificInput: PlayerSpecificInput!): PlayerSummary!
+  getRecentlyPlayed(playerSpecificInput: PlayerSpecificInput!): RecentlyPlayed!
+  todo(id: Int!): Todo!
+  todos: [Todo!]!
+}
+
+type RecentlyPlayed {
+  games: [Game!]!
+  total_count: Int!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+type SignInResponse {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
+}
+
+input SignUpInput {
+  email: String!
+  password: String!
+  username: String!
+}
+
+type Stats {
+  name: String!
+  value: Int!
+}
+
+type Steam {
+  avatar: String!
+  avatarfull: String!
+  avatarhash: String!
+  avatarmedium: String!
+  commentpermission: Int!
+  communityvisibilitystate: Int!
+  lastlogoff: Int!
+  personaname: String!
+  personastate: Int!
+  personastateflags: Int!
+  primaryclanid: String!
+  profilestate: Int!
+  profileurl: String!
+
+  """Steam Id of player account"""
+  steamId: String!
+  timecreated: Int!
+}
+
+type Todo {
+  createdAt: DateTime!
+  id: Int!
+  isCompleted: Boolean!
   title: String!
+  updatedAt: DateTime!
 }
 
 input UpdateTodoInput {
-  title: String
   id: Int!
   isCompleted: Boolean!
+  title: String
+}
+
+type User {
+  email: String!
+  id: Int!
+  username: String!
 }

@@ -119,6 +119,7 @@ type Query {
   getPlayerStats(playerSpecificInput: PlayerSpecificInput!): PlayerStats!
   getPlayerSummary(playerSpecificInput: PlayerSpecificInput!): PlayerSummary!
   getRecentlyPlayed(playerSpecificInput: PlayerSpecificInput!): RecentlyPlayed!
+  hello: String!
   todo(id: Int!): Todo!
   todos: [Todo!]!
 }

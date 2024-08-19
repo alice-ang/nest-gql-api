@@ -12,7 +12,9 @@ import { GatewayIntentBits } from 'discord.js';
 import { BotSlashCommandsModule } from './bot/bot-slash-commands.module';
 import { SteamModule } from './steam/steam.module';
 import { AuthModule } from './auth/auth.module';
+import { AccessTokenGuard } from './auth/guards/accessToken.guard';
 import { UserModule } from './user/user.module';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -43,6 +45,12 @@ import { UserModule } from './user/user.module';
     UserModule,
   ],
 
-  providers: [PrismaService],
+  providers: [
+    PrismaService,
+    {
+      provide: APP_GUARD,
+      useClass: AccessTokenGuard,
+    },
+  ],
 })
 export class AppModule {}

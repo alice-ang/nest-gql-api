@@ -111,7 +111,12 @@ type PlayerSummary {
   timecreated: Int!
 }
 
+type QrCode {
+  dataUrl: String!
+}
+
 type Query {
+  generateQrCode(data: String!): QrCode!
   getGameNews(gameInput: GameInput!): GameNews!
   getGlobalGameAchievements(gameInput: GameInput!): GlobalAchievements!
   getOwnedGames(playerSpecificInput: PlayerSpecificInput!): OwnedGames!

@@ -13,6 +13,8 @@ import { BotSlashCommandsModule } from './bot/bot-slash-commands.module';
 import { SteamModule } from './steam/steam.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { QrCodeService } from './qr-code/qr-code.service';
+import { QrCodeModule } from './qr-code/qr-code.module';
 
 @Module({
   imports: [
@@ -41,8 +43,9 @@ import { UserModule } from './user/user.module';
     SteamModule,
     AuthModule,
     UserModule,
+    QrCodeModule,
   ],
 
-  providers: [PrismaService],
+  providers: [PrismaService, QrCodeService],
 })
 export class AppModule {}

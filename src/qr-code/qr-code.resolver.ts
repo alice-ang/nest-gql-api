@@ -2,7 +2,7 @@ import { Resolver, Query, Args } from '@nestjs/graphql';
 import { QrCodeService } from './qr-code.service';
 import { QrCode } from './entities/qr-code.entity';
 
-@Resolver('QrCode')
+@Resolver(() => QrCode)
 export class QrCodeResolver {
   constructor(private readonly qrCodeService: QrCodeService) {}
 

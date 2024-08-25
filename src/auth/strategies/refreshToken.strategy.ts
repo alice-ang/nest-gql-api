@@ -23,7 +23,7 @@ export class RefreshTokenStrategy extends PassportStrategy(
       ?.replace('Bearer', '')
       .trim();
 
-    console.log(payload);
+    console.log(payload, refreshToken);
     return { ...payload, refreshToken };
   }
 }

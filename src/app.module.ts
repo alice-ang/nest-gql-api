@@ -18,7 +18,6 @@ import { APP_GUARD } from '@nestjs/core';
 import { QrCodeService } from './qr-code/qr-code.service';
 import { QrCodeModule } from './qr-code/qr-code.module';
 
-
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -51,16 +50,11 @@ import { QrCodeModule } from './qr-code/qr-code.module';
 
   providers: [
     PrismaService,
+    QrCodeService,
     {
       provide: APP_GUARD,
       useClass: AccessTokenGuard,
     },
   ],
-
-  providers: [PrismaService, QrCodeService,     {
-      provide: APP_GUARD,
-      useClass: AccessTokenGuard,
-    },],
-
 })
 export class AppModule {}

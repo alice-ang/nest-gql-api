@@ -2,7 +2,6 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 import { GameInput } from './dto/game.input';
 import { PlayerSpecificInput } from './dto/player-specific.input';
 import { PlayerSummary } from './entities/player-summary.entity';
-
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { GameNews } from './entities/game-news.entity';
 import { GlobalAchievements } from './entities/global-achievements.entity';

@@ -5,4 +5,6 @@ export default registerAs('app', () => ({
   name: process.env.APP_NAME,
   workingDirectory: process.env.PWD || process.cwd(),
   port: process.env.APP_PORT,
+  jwtAccessTokenSecret: process.env.ACCESS_TOKEN_SECRET,
+  jwtRefreshTokenSecret: process.env.REFRESH_TOKEN_SECRET,
 }));

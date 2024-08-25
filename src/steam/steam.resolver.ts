@@ -3,13 +3,13 @@ import { GameInput } from './dto/game.input';
 import { PlayerSpecificInput } from './dto/player-specific.input';
 import { PlayerSummary } from './entities/player-summary.entity';
 import { HttpException, HttpStatus } from '@nestjs/common';
+import { GameNews } from './entities/game-news.entity';
+import { GlobalAchievements } from './entities/global-achievements.entity';
+import { OwnedGames } from './entities/owned-games.entity';
+import { PlayerStats } from './entities/player-stats.entity';
+import { RecentlyPlayed } from './entities/recently.played.entity';
 import { Steam } from './entities/steam.entity';
 import { SteamService } from './steam.service';
-import { GameNews } from './entities/game-news.entity';
-import { PlayerStats } from './entities/player-stats.entity';
-import { OwnedGames } from './entities/owned-games.entity';
-import { RecentlyPlayed } from './entities/recently.played.entity';
-import { GlobalAchievements } from './entities/global-achievements.entity';
 
 @Resolver(() => Steam)
 export class SteamResolver {

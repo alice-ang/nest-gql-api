@@ -12,9 +12,12 @@ import { GatewayIntentBits } from 'discord.js';
 import { BotSlashCommandsModule } from './bot/bot-slash-commands.module';
 import { SteamModule } from './steam/steam.module';
 import { AuthModule } from './auth/auth.module';
+import { AccessTokenGuard } from './auth/guards/accessToken.guard';
 import { UserModule } from './user/user.module';
+import { APP_GUARD } from '@nestjs/core';
 import { QrCodeService } from './qr-code/qr-code.service';
 import { QrCodeModule } from './qr-code/qr-code.module';
+
 
 @Module({
   imports: [
@@ -46,6 +49,18 @@ import { QrCodeModule } from './qr-code/qr-code.module';
     QrCodeModule,
   ],
 
-  providers: [PrismaService, QrCodeService],
+  providers: [
+    PrismaService,
+    {
+      provide: APP_GUARD,
+      useClass: AccessTokenGuard,
+    },
+  ],
+
+  providers: [PrismaService, QrCodeService,     {
+      provide: APP_GUARD,
+      useClass: AccessTokenGuard,
+    },],
+
 })
 export class AppModule {}

@@ -13,7 +13,7 @@ export class AccessTokenStrategy extends PassportStrategy(Strategy, 'jwt') {
       passReqToCallback: true,
     });
   }
-  async valdate(payload: JwtPayload) {
+  validate(payload: JwtPayload) {
     return payload;
   }
 }

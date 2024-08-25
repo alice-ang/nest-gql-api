@@ -51,11 +51,17 @@ type LogOutResponse {
 
 type Mutation {
   createTodo(createTodoInput: CreateTodoInput!): Todo!
+  getNewTokens: NewTokensResponse!
   removeTodo(id: Int!): Todo!
   signIn(signInInput: SignInInput!): SignInResponse!
   signOut(id: Int!): LogOutResponse!
   signUp(signUpInput: SignUpInput!): SignInResponse!
   updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
+}
+
+type NewTokensResponse {
+  accessToken: String!
+  refreshToken: String!
 }
 
 type NewsItem {
@@ -119,7 +125,6 @@ type Query {
   getPlayerStats(playerSpecificInput: PlayerSpecificInput!): PlayerStats!
   getPlayerSummary(playerSpecificInput: PlayerSpecificInput!): PlayerSummary!
   getRecentlyPlayed(playerSpecificInput: PlayerSpecificInput!): RecentlyPlayed!
-  hello: String!
   todo(id: Int!): Todo!
   todos: [Todo!]!
 }

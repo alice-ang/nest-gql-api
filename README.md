@@ -67,7 +67,7 @@ $ npm run start:prod
 
 #### API
 
-Graphql playground available at http://localhost:8000/graphql
+Graphql playground available at http://localhost:8000/graphql on local and https://nest-gql-api-production.up.railway.app/graphql on prod
 
 Most mutations and queries are protected accept for`signIn` and `signUp` which are set to be public. 
 When signing up and signing in you need to grab the accessToken and use these HTTP-headers in the playground in order to get access to all mutations and queries

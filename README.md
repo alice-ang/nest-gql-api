@@ -65,4 +65,22 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+#### API
+
 Graphql playground available at http://localhost:8000/graphql
+
+Most mutations and queries are protected accept for`signIn` and `signUp` which are set to be public. 
+When signing up and signing in you need to grab the accessToken and use these HTTP-headers in the playground in order to get access to all mutations and queries
+```bash
+{
+  "authorization": "Bearer <accessToken>"
+}
+```
+
+#### Steam
+1. For queries specific to a player account you need a steamId, see [video](https://www.youtube.com/watch?v=92RyHAE1bAI) on how to find it.
+2. For queries specific to a certain game, you need to know the [appId](https://gaming.stackexchange.com/questions/149837/how-do-i-find-the-id-for-a-game-on-steam).
+
+
+
+
